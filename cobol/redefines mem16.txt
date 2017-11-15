@@ -1,0 +1,12 @@
+      IDENTIFICATION DIVISION.                        
+      PROGRAM-ID. MEM16.                              
+      ENVIRONMENT DIVISION.                           
+      DATA DIVISION.                                  
+      WORKING-STORAGE SECTION.                        
+      01 NAME1.                                       
+       02 FN PIC X(10) VALUE "HELLO".                 
+       02 LN PIC X(10) VALUE "WORLD".                 
+      01 NAME2 REDEFINES NAME1 PIC X(20).             
+      PROCEDURE DIVISION.                             
+          DISPLAY NAME2.                              
+          STOP RUN.                                   

@@ -1,0 +1,60 @@
+        IDENTIFICATION DIVISION.                                  
+        PROGRAM-ID. MEM19.                                        
+        ENVIRONMENT DIVISION.                                     
+        DATA DIVISION.                                            
+        WORKING-STORAGE SECTION.                                  
+        01 STUDENT.                                               
+         02 DETAILS OCCURS 10 TIMES.                              
+          03 SNAME PIC A(26).                                     
+          03 M1 PIC 99.                                           
+          03 M2 PIC 99.                                           
+          03 M3 PIC 99.                                           
+          03 TOT PIC 999.                                         
+          03 AVG PIC 99.                                          
+          03 G   PIC A(5).                                        
+        77 I PIC 99.                                              
+        77 J PIC 99.                                              
+        77 N PIC 99.                                                     
+        PROCEDURE DIVISION.                                              
+            MOVE 1 TO N.                                                 
+            PERFORM PARA1 VARYING I FROM 1 BY 1 UNTIL I > N.             
+            PERFORM PARA2 VARYING I FROM 1 BY 1 UNTIL I > N.             
+            PERFORM DISP1 VARYING I FROM 1 BY 1 UNTIL I > N.             
+            STOP RUN.                                                    
+        PARA1.                                                           
+            ACCEPT SNAME(I).                                             
+            ACCEPT M1(I).                                                
+            ACCEPT M2(I).                                                
+            ACCEPT M3(I).                                                
+            COMPUTE TOT(I) = M1(I) + M2(I) + M3(I).                      
+            COMPUTE AVG(I) = ( M1(I) + M2(I) + M3(I) ) / 3.              
+        PARA2.                                                           
+            IF M1(I) > 45 AND M2(I) >45 AND M3(I) > 45                   
+             IF AVG(I) >= 90                                             
+             MOVE "O" TO G(I)                                    
+             ELSE                                                
+              IF AVG(I) > 80                                     
+              MOVE "A" TO G(I)                                   
+              ELSE                                               
+               IF AVG(I) > 60                                    
+               MOVE "B" TO G(I)                                  
+               ELSE                                              
+                IF AVG(I) > 50                                   
+                MOVE "C" TO G(I)                                 
+                ELSE                                             
+                MOVE "D" TO G(I)                                 
+                END-IF                                           
+               END-IF                                            
+              END-IF                                             
+             END-IF                                              
+            ELSE                                                 
+           MOVE "FAIL" TO G(I)                         
+           END-IF.                                     
+       DISP1.                                          
+           DISPLAY SNAME(I).                           
+           DISPLAY M1(I).                              
+           DISPLAY M2(I).                              
+           DISPLAY M3(I).                              
+           DISPLAY TOT(I).                             
+           DISPLAY AVG(I).                             
+           DISPLAY G(I).                               

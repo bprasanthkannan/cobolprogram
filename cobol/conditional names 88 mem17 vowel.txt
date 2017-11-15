@@ -1,0 +1,14 @@
+        IDENTIFICATION DIVISION.                               
+        PROGRAM-ID. MEM17.                                     
+        ENVIRONMENT DIVISION.                                  
+        DATA DIVISION.                                         
+        WORKING-STORAGE SECTION.                               
+        01 LETTER PIC A(2) VALUE 'R'.                          
+          88 V1 VALUES 'A','E','I','O','U'.                    
+        PROCEDURE DIVISION.                                    
+            IF V1                                              
+            DISPLAY "VALID"                                    
+            ELSE                                               
+            DISPLAY "VALID 2"                                  
+            END-IF.                                            
+            STOP RUN.                                          

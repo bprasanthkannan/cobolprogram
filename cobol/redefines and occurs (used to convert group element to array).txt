@@ -1,0 +1,18 @@
+       IDENTIFICATION DIVISION.                                    
+       PROGRAM-ID. MEM20.                                          
+       ENVIRONMENT DIVISION.                                       
+       DATA DIVISION.                                              
+       WORKING-STORAGE SECTION.                                    
+       01 REC.                                                     
+        02 DA.                                                     
+         03 D1 PIC X(20) VALUE 'ADS1'.                             
+         03 D2 PIC X(20) VALUE 'ADS2'.                             
+         03 D3 PIC X(20) VALUE 'ADS3'.                             
+         03 D4 PIC X(20) VALUE 'ADS4'.                             
+         03 D5 PIC X(20) VALUE 'ADS5'.                             
+         03 D6 PIC X(20) VALUE 'ADS6'.                             
+         03 D7 PIC X(20) VALUE 'ADS7'.                             
+        02 DA1 REDEFINES DA PIC X(20) OCCURS 7 TIMES.              
+       PROCEDURE DIVISION.                                         
+            DISPLAY DA1(2).                                   
+            STOP RUN.                                         

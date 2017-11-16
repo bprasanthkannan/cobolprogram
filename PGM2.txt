@@ -1,0 +1,48 @@
+000100        IDENTIFICATION DIVISION.                
+000200        PROGRAM-ID. PGM2.                       
+000300        ENVIRONMENT DIVISION.                   
+000500        INPUT-OUTPUT SECTION.                   
+000510        FILE-CONTROL.                           
+000600              SELECT OUTFILE ASSIGN TO AS-DD1   
+000700              ORGANIZATION IS SEQUENTIAL        
+000800              ACCESS MODE IS SEQUENTIAL         
+000900              FILE STATUS IS WS-FS1.            
+001000        DATA DIVISION.                          
+001010        FILE SECTION.                           
+001100        FD OUTFILE.                             
+001200        01 OUT-REC.                             
+001300            02 ENUM PIC 9999.                   
+001310            02 FILLER PIC XXXXX.                
+001320            02 ENAME PIC X(10).    
+001330            02 FILLER PIC X(61).                  
+001400        WORKING-STORAGE SECTION.                  
+001500        01 STUD-REC.                              
+001600             03 EMPNO PIC X(3).                   
+001700             03 EMPNAME PIC X(5).                 
+001800             03 FILLER PIC X(72).                 
+002000         77 WS-FS1 PIC 9(2).                      
+002100         77 OPT PIC X(1) VALUE 'Y'.               
+002200        PROCEDURE DIVISION.                       
+002300                PERFORM OPEN-PARA.                
+002400                PERFORM WRITE-PARA.               
+002500                PERFORM CLOSE-PARA.               
+002600        OPEN-PARA.                                
+002700                OPEN OUTPUT OUTFILE.              
+002800                IF WS-FS1 = 0                     
+002900                    DISPLAY "OPEN SUCCESS"        
+003000                 ELSE      
+003100                    DISPLAY "FAILURE" WS-FS1     
+003200                    STOP RUN                     
+003300                 END-IF.                         
+003400         WRITE-PARA.                             
+003500                 ACCEPT ENUM.                    
+003510                 ACCEPT ENAME.                   
+003700                 WRITE OUT-REC.                  
+003800                 IF WS-FS1 = 0                   
+003900                     DISPLAY "SUCCESS"           
+004000                 ELSE                            
+004100                    DISPLAY "FAILURE" WS-FS1     
+004200                 END-IF.                         
+004300          CLOSE-PARA.                            
+004400                 CLOSE OUTFILE.                  
+004500                 STOP RUN.                                              

@@ -1,0 +1,40 @@
+ 000100        IDENTIFICATION DIVISION.         
+ 000200        PROGRAM-ID. PGM1                 
+ 000300        ENVIRONMENT DIVISION.            
+ 000400        INPUT-OUTPUT SECTION.            
+ 000410        FILE-CONTROL.                    
+ 000500             SELECT INFILE ASSIGN TO DD1 
+ 000600             ORGANIZATION IS SEQUENTIAL  
+ 000700             ACCESS MODE IS SEQUENTIAL   
+ 000800             FILE STATUS IS WS-FS1.      
+ 000900        DATA DIVISION.                   
+ 001000        FILE SECTION.                    
+ 001100        FD INFILE.                       
+ 001200        01 IN-REC.                       
+ 001300            02 SREC PIC X(80).           
+ 001400        WORKING-STORAGE SECTION.         
+ 001500        77 WS-FS1 PIC 9(2).              
+001600        77 EOF PIC X(1) VALUE 'N'.                   
+001700        PROCEDURE DIVISION.                          
+001800        MAIN-PARA.                                   
+001900                 PERFORM OPEN-PARA.                  
+002000                 PERFORM READ-PARA UNTIL EOF = 'Y'.  
+002100                 PERFORM CLOSE-PARA.                 
+002200        OPEN-PARA.                                   
+002300                 OPEN INPUT INFILE.                  
+002400                 IF WS-FS1 = 0                       
+002500                    DISPLAY "SUCCESS"                
+002600                 ELSE                                
+002700                    DISPLAY "FAILURE" WS-FS1         
+002710                    STOP RUN                         
+002800                 END-IF.                             
+002900         READ-PARA.                                  
+003000                 READ INFILE                         
+003100                 AT END                              
+003200                    MOVE 'Y' TO EOF        
+003300                 NOT AT END                
+003400                    DISPLAY IN-REC         
+003500                 END-READ.                 
+003600          CLOSE-PARA.                      
+003700                 CLOSE INFILE.             
+003800                 STOP RUN.                 

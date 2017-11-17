@@ -1,0 +1,46 @@
+000100        IDENTIFICATION DIVISION.                
+000200        PROGRAM-ID. PGM3                        
+000300        ENVIRONMENT DIVISION.                   
+000400        CONFIGURATION SECTION.                  
+000500        INPUT-OUTPUT SECTION.                   
+000600        FILE-CONTROL.                           
+000700             SELECT INFILE ASSIGN TO DD1        
+000800             ORGANIZATION IS INDEXED            
+000900             ACCESS MODE IS RANDOM              
+000910             RECORD KEY IS SNO                  
+001000             FILE STATUS IS WS-FS1.             
+001100        DATA DIVISION.                          
+001200        FILE SECTION.                           
+001300        FD INFILE.                              
+001400        01 IN-REC.                              
+001500            02 SNO PIC X(3).  
+001510            02 FILLER PIC X(77).                
+001600        WORKING-STORAGE SECTION.                
+001700        77 WS-FS1 PIC 9(2).                     
+001800        77 WS-SNO PIC 9(3).                     
+001900        PROCEDURE DIVISION.                     
+002000        MAIN-PARA.                              
+002100                 PERFORM OPEN-PARA.             
+002200                 PERFORM READ-PARA.             
+002300                 PERFORM CLOSE-PARA.            
+002400        OPEN-PARA.                              
+002500                 OPEN INPUT INFILE.             
+002600                 IF WS-FS1 = 0                  
+002700                    DISPLAY "SUCCESS"           
+002800                 ELSE                           
+002900                    DISPLAY "FAILURE" WS-FS1    
+002910                    STOP RUN                    
+003000                 END-IF.                        
+ 003100         READ-PARA.                               
+ 003110                 ACCEPT WS-SNO.                   
+ 003120                 MOVE WS-SNO TO SNO.              
+ 003130                 DISPLAY SNO.                     
+ 003200                 READ INFILE                      
+ 003300                 INVALID KEY                      
+ 003400                    DISPLAY "NO MATCH FOUND"      
+ 003500                 NOT INVALID KEY                  
+ 003600                    DISPLAY IN-REC                
+ 003700                 END-READ.                        
+ 003800          CLOSE-PARA.                             
+ 003900                 CLOSE INFILE.                    
+ 004000                 STOP RUN.                                          

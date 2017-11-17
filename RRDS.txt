@@ -1,0 +1,44 @@
+000100        IDENTIFICATION DIVISION.              
+000200        PROGRAM-ID. PGM4                      
+000300        ENVIRONMENT DIVISION.                 
+000400        CONFIGURATION SECTION.                
+000500        INPUT-OUTPUT SECTION.                 
+000600        FILE-CONTROL.                         
+000700             SELECT INFILE ASSIGN TO DD1      
+000800             ORGANIZATION IS RELATIVE         
+000900             ACCESS MODE IS RANDOM            
+000910             RELATIVE KEY IS RKEY             
+001000             FILE STATUS IS WS-FS1.           
+001100        DATA DIVISION.                        
+001200        FILE SECTION.                         
+001300        FD INFILE.                            
+001400        01 EMP-REC.                           
+001500            02 EMP PIC X(80).                 
+001700        WORKING-STORAGE SECTION.                 
+001800        77 WS-FS1 PIC 9(2).                      
+001900        77 WS-SNO PIC 9(3).                      
+001910        77 RKEY PIC 9.                           
+002000        PROCEDURE DIVISION.                      
+002100        MAIN-PARA.                               
+002200                 PERFORM OPEN-PARA.              
+002300                 PERFORM READ-PARA.              
+002400                 PERFORM CLOSE-PARA.             
+002500        OPEN-PARA.                               
+002600                 OPEN INPUT INFILE.              
+002700                 IF WS-FS1 = 0                   
+002800                    DISPLAY "SUCCESS"            
+002900                 ELSE                            
+003000                    DISPLAY "FAILURE" WS-FS1     
+003100                    STOP RUN                     
+003200                 END-IF.                         
+003300         READ-PARA.                                
+003400                 ACCEPT RKEY.                      
+003600                 READ INFILE                       
+003700                 INVALID KEY                       
+003800                    DISPLAY "NO MATCH FOUND"       
+003900                 NOT INVALID KEY                   
+004000                    DISPLAY EMP-REC                
+004100                 END-READ.                         
+004200          CLOSE-PARA.                              
+004300                 CLOSE INFILE.                     
+004400                 STOP RUN.                         

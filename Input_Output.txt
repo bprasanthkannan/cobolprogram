@@ -1,0 +1,62 @@
+000100        IDENTIFICATION DIVISION.              
+000200        PROGRAM-ID. PGM1                      
+000300        ENVIRONMENT DIVISION.                 
+000400        CONFIGURATION SECTION.                
+000500        INPUT-OUTPUT SECTION.                 
+000600        FILE-CONTROL.                         
+000700             SELECT INFILE ASSIGN TO DD1      
+000800             ORGANIZATION IS SEQUENTIAL       
+000900             ACCESS MODE IS SEQUENTIAL        
+000901             FILE STATUS IS WS-FS1.           
+000910             SELECT OUTFILE ASSIGN TO DD2     
+000920             ORGANIZATION IS SEQUENTIAL       
+000930             ACCESS MODE IS SEQUENTIAL        
+001000             FILE STATUS IS WS-FS2.           
+001100        DATA DIVISION.                        
+001200        FILE SECTION. 
+000100        FD INFILE.                   
+000200        01 IN-REC.                   
+000300            02 SREC PIC X(80).       
+000400        FD OUTFILE.                  
+000500        01 OUT-REC.                  
+000600            02 OREC PIC X(80).                               
+001600        WORKING-STORAGE SECTION.                       
+001700        77 WS-FS1 PIC 9(2).                            
+001710        77 WS-FS2 PIC 9(2).                            
+001800        77 EOF PIC X(1) VALUE 'N'.                     
+001900        PROCEDURE DIVISION.                            
+002000        MAIN-PARA.                                     
+002100                 PERFORM OPEN-PARA.                    
+002110                 PERFORM OPEN-PARA1.                   
+002200                 PERFORM READ-PARA UNTIL EOF = 'Y'.    
+002300                 PERFORM CLOSE-PARA.                   
+002400        OPEN-PARA.                                     
+002500                 OPEN INPUT INFILE.                    
+002600                 IF WS-FS1 = 0                         
+002700                    DISPLAY "SUCCESS"                  
+002800                 ELSE                                  
+002900                    DISPLAY "FAILURE" WS-FS1 
+003000                    STOP RUN                    
+003100                 END-IF.                        
+003200         READ-PARA.                             
+003300                 READ INFILE                    
+003400                 AT END                         
+003500                    MOVE 'Y' TO EOF             
+003600                 NOT AT END                     
+003700                    DISPLAY IN-REC              
+003710                    MOVE IN-REC TO OUT-REC      
+003720                    PERFORM OUTPUT-PARA         
+003800                 END-READ.                      
+003900          CLOSE-PARA.                           
+004000                 CLOSE INFILE.                  
+004100                 STOP RUN.                      
+004200        OPEN-PARA1.                             
+004300                 OPEN OUTPUT OUTFILE.           
+004400                 IF WS-FS1 = 0                  
+004500                    DISPLAY "SUCCESS"           
+004600                 ELSE                           
+004700                    DISPLAY "FAILURE" WS-FS2    
+004800                    STOP RUN                    
+004900                 END-IF.                        
+005000        OUTPUT-PARA.                            
+005100                 WRITE OUT-REC.                           

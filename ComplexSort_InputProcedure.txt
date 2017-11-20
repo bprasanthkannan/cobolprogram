@@ -1,0 +1,52 @@
+000100        IDENTIFICATION DIVISION.                    
+000200        PROGRAM-ID. CSORT.                          
+000300        ENVIRONMENT DIVISION.                       
+000400        INPUT-OUTPUT SECTION.                       
+000500        FILE-CONTROL.                               
+000600             SELECT INFILE ASSIGN TO DD1.           
+000700             SELECT WRKOUT ASSIGN TO DD2.           
+000800             SELECT OUTFILE ASSIGN TO DD3.          
+000900        DATA DIVISION.                              
+001000        FILE SECTION.                               
+001100        FD INFILE.                                  
+001200          01 IN-REC.                                
+001300            02 ENO PIC X(3).                        
+001400            02 FILLER PIC X(1).                     
+001500            02 ENAME PIC X(5).                      
+001600            02 FILLER PIC X(71).                    
+001700        SD WRKOUT.                    
+001800          01 WREC.                    
+001900            02 ENO PIC X(3).          
+002000            02 FILLER PIC X(1).       
+002100            02 ENAME PIC X(5).        
+002200            02 FILLER PIC X(71).      
+002300        FD OUTFILE.                   
+002400          01 OUT-REC.                 
+002500            02 ENO PIC X(3).          
+002600            02 FILLER PIC X(1).       
+002700            02 ENAME PIC X(5).        
+002800            02 FILLER PIC X(71).      
+002900         WORKING-STORAGE SECTION.     
+003000         01 EOF PIC X(02).            
+003100         01 F PIC 9(04).              
+003200         PROCEDURE DIVISION.          
+003300         PARA.          
+003400              DISPLAY 'HELLO'.                        
+003500              SORT WRKOUT ON ASCENDING ENO OF WREC    
+003600              INPUT PROCEDURE PARA2                   
+003700              GIVING OUTFILE.                         
+003800              PERFORM PARA3.                          
+003900         PARA2.                                       
+004000             OPEN INPUT INFILE.                       
+004100             PERFORM UNTIL EOF = 'Y'                  
+004200             READ INFILE                              
+004300             AT END                                   
+004400             MOVE 'Y' TO EOF                          
+004500             NOT AT END                               
+004600             IF (ENO OF IN-REC > 103 )                
+004700                 RELEASE WREC FROM IN-REC             
+004800             END-IF                                   
+004900             END-READ                                 
+005000             END-PERFORM.                             
+005100          PARA3.              
+005200              STOP RUN.                     

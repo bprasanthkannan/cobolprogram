@@ -1,0 +1,39 @@
+000100        IDENTIFICATION DIVISION.                             
+000200        PROGRAM-ID. STRING1.                                 
+000300        ENVIRONMENT DIVISION.                                
+000400        DATA DIVISION.                                       
+000500        WORKING-STORAGE SECTION.                             
+000510        01 WS-INPUT PIC X(10) VALUE "AABBBCCC".              
+000600        01 WS-DATA1 PIC X(20) VALUE "THIS PROGRAM".          
+000700        01 WS-DATA2 PIC X(10) VALUE "IS EXAMPLE".            
+000800        01 WS-DATA3 PIC X(20) VALUE "FOR STRING #EXAMPLE".   
+000900        01 WS-DES PIC X(30).                                 
+000910        01 WS-POINTER PIC 9(2) VALUE 2.                      
+000920        01 CTR PIC 9(2).                                     
+001000        PROCEDURE DIVISION.                                  
+001100             STRING WS-DATA1 DELIMITED BY SPACES             
+001200             ' ' DELIMITED BY SIZE                           
+001300              WS-DATA2 DELIMITED BY SIZE 
+ 001400             ' ' DELIMITED BY SIZE                         
+ 001500             WS-DATA3 DELIMITED BY '#'                     
+ 001600             INTO WS-DES                                   
+ 001700             WITH POINTER WS-POINTER                       
+ 001800             ON OVERFLOW                                   
+ 001900               DISPLAY "OVERFLOW OCCURED"                  
+ 002000             END-STRING.                                   
+ 002001             INSPECT WS-DATA1 TALLYING CTR FOR CHARACTERS  
+ 002002                     BEFORE INITIAL 'R'.                   
+ 002010             DISPLAY WS-DES.                               
+ 002011             DISPLAY CTR.                                  
+ 002012             MOVE 0 TO CTR.                                
+ 002020             INSPECT WS-DATA1 TALLYING CTR FOR ALL 'R'.    
+ 002030             DISPLAY CTR.                                  
+ 002031             MOVE 0 TO CTR.                                
+ 002040             INSPECT WS-INPUT TALLYING CTR FOR LEADING 'A'.
+ 002050             DISPLAY CTR.  
+ 002060             INSPECT WS-INPUT REPLACING CHARACTERS BY 'C' AFTER   
+ 002070                    INITIAL 'B'.                                  
+ 002080             DISPLAY WS-INPUT.                                    
+ 002090             INSPECT WS-DATA1 REPLACING ALL 'R' BY '#'.           
+ 002091             DISPLAY WS-DATA1.                                    
+ 002100             STOP RUN.                                                                                                

@@ -1,0 +1,53 @@
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. MEM10.                                               
+       ENVIRONMENT DIVISION.                                            
+       INPUT-OUTPUT SECTION.                                            
+       FILE-CONTROL.                                                    
+           SELECT INP ASSIGN TO DD1.                                    
+           SELECT WRK ASSIGN TO DD2.                                    
+           SELECT OUTP ASSIGN TO DD3.                                   
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       FD INP.                                                          
+       01 IREC.                                                         
+        02 FILLER PIC X(2).                                             
+        02 IDS PIC X(3).                                                
+        02 FILLER PIC X(3).   
+        02 NAMES PIC X(4).                                 
+        02 FILLER PIC X(3).                                
+        02 AMT PIC X(4).                                   
+        02 FILLER PIC X(2).                                
+        02 DPT PIC X(2).                                   
+        02 FILLER PIC X(2).                                
+        02 LOC PIC X(7).                                   
+        02 FILLER PIC X(48).                               
+       SD WRK.                                             
+       01 WREC.                                            
+        02 FILLER PIC X(2).                                
+        02 IDS PIC X(3).                                   
+        02 FILLER PIC X(3).                                
+        02 NAMES PIC X(4).                                 
+        02 FILLER PIC X(3).                                
+        02 AMT PIC X(4).                                   
+        02 FILLER PIC X(2).                               
+        02 DPT PIC X(2).                                  
+        02 FILLER PIC X(2).                               
+        02 LOC PIC X(7).                                  
+        02 FILLER PIC X(48).                              
+       FD OUTP.                                           
+       01 OREC.                                           
+        02 FILLER PIC X(2).                               
+        02 IDS PIC X(3).                                  
+        02 FILLER PIC X(3).                               
+        02 NAMES PIC X(4).                                
+        02 FILLER PIC X(3).                               
+        02 AMT PIC X(4).                                  
+        02 FILLER PIC X(2).                               
+        02 DPT PIC X(2).                                  
+        02 FILLER PIC X(2).                               
+        02 LOC PIC X(7).                                 
+        02 FILLER PIC X(48).                             
+       PROCEDURE DIVISION.                               
+           SORT WRK ON DESCENDING IDS OF WREC            
+           USING INP GIVING OUTP.                        
+           STOP RUN.                                                                               

@@ -1,0 +1,20 @@
+//WPR045A JOB 'ACC007','WIPRO TECH',NOTIFY=WPR045,CLASS=A     
+//MYLIB    JCLLIB ORDER=WPRADM.WIP.COMPILER                   
+//* PROGRAM TO COMPILE THE COBOL PRGM                         
+//STEP1    EXEC PROC=COBCL,                                   
+//         SRCLIB=WPR045.OCT23.COBOLADV,                      
+//         MEMBER=MINI,                                       
+//         COPYLIB=WPR045.OCT23.COBOLADV,                     
+//         LOADLIB=WPR045.OCT23.LOADLIB                       
+//*LKED.SYSLIB DD DSN=WPR045.OCT23.LOADLIB,DISP=SHR           
+
+
+
+ //WPR045A JOB 'ACC007','WIPRO TECH',NOTIFY=&SYSUID,CLASS=A  
+ //* PROGRAM TO EXECUTE THE COBOL PRGM                       
+ //STEP1    EXEC PGM=MINI                                    
+ //STEPLIB DD DSN=WPR045.OCT23.LOADLIB,DISP=SHR              
+ //DD1 DD DSN=WPR045.OCT23.EMASTER,DISP=SHR                  
+ //DD2 DD DSN=WPR045.OCT23.TEST3,DISP=SHR                    
+ //SYSIN DD DUMMY                                            
+ //SYSOUT DD SYSOUT=*                                        

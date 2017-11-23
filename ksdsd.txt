@@ -1,0 +1,53 @@
+       IDENTIFICATION DIVISION.                         
+       PROGRAM-ID. MEM12.                               
+       ENVIRONMENT DIVISION.                            
+       INPUT-OUTPUT SECTION.                            
+       FILE-CONTROL.                                    
+           SELECT TES ASSIGN TO DD1                     
+           ORGANIZATION IS INDEXED                      
+           ACCESS MODE IS RANDOM                        
+           RECORD KEY IS SID                            
+           FILE STATUS IS FS.                           
+       DATA DIVISION.                                   
+       FILE SECTION.                                    
+       FD TES.                                          
+       01 REC.                                          
+        02 SID PIC X(3).                               
+        02 FILLER PIC X(7).                            
+        02 NAM PIC A(26).                              
+        02 FILLER PIC X(3).                            
+        02 M1 PIC X(2).                                
+        02 FILLER PIC X(3).                            
+        02 M2 PIC X(2).                                
+        02 FILLER PIC X(2).                            
+        02 M3 PIC X(2).                                
+        02 FILLER PIC X(2).                            
+        02 TOT PIC X(3).                               
+        02 FILLER PIC X(3).                            
+        02 AG PIC X(2).                                
+        02 FILLER PIC X(38).                           
+       WORKING-STORAGE SECTION.                        
+       77 FS PIC 99.                                   
+       77 EOF PIC A VALUE 'S'.                         
+       PROCEDURE DIVISION.                         
+           OPEN I-O TES.                           
+           IF FS = 0                               
+            DISPLAY 'S'                            
+           ELSE                                    
+            DISPLAY 'F' FS                         
+            STOP RUN                               
+           END-IF.                                 
+           MOVE 102 TO SID.                        
+           READ TES                                
+            INVALID KEY                            
+             DISPLAY 'INVALID'                     
+            NOT INVALID KEY                        
+             DISPLAY REC                           
+           END-READ.       
+           MOVE 105 TO SID.                    
+           MOVE 'KANNAN' TO NAM.               
+           REWRITE REC                         
+            INVALID KEY DISPLAY 'FAIL'         
+            NOT INVALID KEY DISPLAY REC        
+           END-REWRITE.                        
+           STOP RUN.                                                   

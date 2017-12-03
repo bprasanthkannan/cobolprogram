@@ -1,0 +1,29 @@
+ /*create table tab3(empno numeric(3) primary key not null,              
+      ename char(12),salary numeric(5),dept numeric(2)) in               
+      wpr045db.wpr045ts;                                                 
+ create unique index ind4 on tab3(empno);                                
+ insert into tab3 values (111,'kanna',12000,10);                         
+ insert into tab3 values (112,'hanna',13000,10);                         
+ insert into tab3 values (113,'sanna',12500,10);                         
+ insert into tab3 values (114,'karma',13500,10);                         
+ insert into tab3 values (115,'karna',16000,10);                         
+ create view v1 as select * from tab3 where salary >12500;               
+ insert into v1 values (117,'bheem',13500,10);                           
+ select * from v1;                                                       
+ create view v2 as select * from tab3                                    
+    where salary>13000 with check option;                                
+create view v3 as select * from v2 where empno>112 with cascaded check  
+                                                           option;      
+insert into v3 values (120,'rak',13500,10);                             
+select * from v3;                                                       
+select * from v2;                                                       
+select * from tab3;                                                     
+create synonym s1 for wpr045.tab3;                                      
+select * from s1;                                                       
+drop synonym s1;                                                        
+create alias a1 for wpr045.tab3;                                        
+select * from a1;                                                       
+drop alias a1;*/                                                        
+drop view v1;                                                           
+drop view v2;                                                           
+drop view v3;                                                           

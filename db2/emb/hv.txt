@@ -1,0 +1,51 @@
+       IDENTIFICATION DIVISION.                              
+       PROGRAM-ID. MEM1.                                     
+       ENVIRONMENT DIVISION.                                 
+       DATA DIVISION.                                        
+       WORKING-STORAGE SECTION.                              
+       01 EMP.                                               
+        02 EMPID PIC 9(3).                                   
+        02 ENAME PIC X(12).                                  
+        02 SALARY PIC 9(5).                                  
+       01 HEMP.                                              
+        02 HEMPID PIC S9(3) COMP-3.                          
+        02 HENAME.                                           
+         03 HENAME-LEN PIC 9(4).                             
+         03 HENAME-VAL PIC X(12).                             
+        02 HSALARY PIC S9(5) COMP-3.                   
+           EXEC SQL                                    
+            INCLUDE SQLCA                              
+           END-EXEC.                                   
+       PROCEDURE DIVISION.                             
+           PERFORM PARA1.                              
+           PERFORM PARA2.                              
+           STOP RUN.                                   
+       PARA1.                                          
+           ACCEPT EMPID.                               
+           ACCEPT ENAME.                               
+           ACCEPT SALARY.                              
+           MOVE EMPID TO HEMPID.                       
+           MOVE LENGTH OF ENAME TO HENAME-LEN.         
+           MOVE ENAME TO HENAME-VAL.                   
+           MOVE SALARY TO HSALARY.                     
+       PARA2.                                          
+           EXEC SQL                                                     
+           INSERT INTO TAB1 VALUES( :HEMPID, :HENAME-VAL, :HSALARY)     
+           END-EXEC.                                                    
+      *    EXEC SQL                                                     
+      *    UPDATE TAB1 SET ENAME='RAVI' WHERE EMPID=500                 
+      *    END-EXEC.                                                    
+           EXEC SQL                                                     
+            SELECT EMPID,ENAME,SALARY INTO :HEMPID,:HENAME-VAL,:HSALARY 
+           FROM TAB1 WHERE EMPID = 500                                  
+           END-EXEC.                                                    
+                                                                        
+           DISPLAY HEMPID.                                              
+           DISPLAY HENAME-VAL.                                          
+           DISPLAY HSALARY.                                             
+      *    EXEC SQL                                                     
+      *     DELETE FROM TAB1 WHERE EMPID=500                            
+      *    END-EXEC.                                                    
+           IF SQLCODE = 0                             
+            DISPLAY 'SUCCESS'                         
+                                                      

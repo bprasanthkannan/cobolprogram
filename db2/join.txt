@@ -1,0 +1,26 @@
+ /*CREATE TABLE TAB1(EMPID NUMERIC(5) PRIMARY KEY NOT NULL,          
+          ENAME CHAR(20) NOT NULL,DEPT NUMERIC(2),                   
+          SALARY NUMERIC(6) NOT NULL) IN WPR045DB.WPR045TS;          
+ CREATE UNIQUE INDEX IN2 ON TAB1(EMPID);                             
+ INSERT INTO TAB1 VALUES (101,'RAJESH',10,12000);                    
+ INSERT INTO TAB1 VALUES (102,'JAGDESH',10,12000);                   
+ INSERT INTO TAB1 VALUES (103,'SURESH',20,12000);                    
+ INSERT INTO TAB1 VALUES (104,'RAMESH',30,12000);                    
+ CREATE TABLE TAB2(DEPTID NUMERIC(5) PRIMARY KEY NOT NULL,           
+         DEPTNAM CHAR(12),SALARY NUMERIC(6)) IN                      
+         WPR045DB.WPR045TS;                                          
+ CREATE UNIQUE INDEX IN3 ON TAB2(DEPTID);                            
+ INSERT INTO TAB2 VALUES (10,'HLS',12000);                           
+ INSERT INTO TAB2 VALUES (20,'FS',15000);                            
+ SELECT * FROM TAB1;                                                 
+ SELECT * FROM TAB2;*/                                               
+ SELECT A.EMPID,A.ENAME,B.SALARY FROM TAB1 A INNER JOIN                  
+           TAB2 B ON A.DEPT=B.DEPTID;                                    
+ SELECT A.EMPID,A.ENAME,B.SALARY FROM TAB1 A LEFT OUTER JOIN TAB2 B ON   
+           A.DEPT=B.DEPTID;                                              
+ SELECT A.EMPID,A.ENAME,B.SALARY FROM TAB1 A RIGHT OUTER JOIN TAB2 B ON  
+           A.DEPT=B.DEPTID;                                              
+ SELECT A.EMPID,A.ENAME,B.SALARY FROM TAB1 A FULL OUTER JOIN TAB2 B ON   
+           A.DEPT=B.DEPTID;                                              
+ DROP TABLE TAB1;                                                        
+ DROP TABLE TAB2;                                                        

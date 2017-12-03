@@ -1,0 +1,16 @@
+/*CREATE TABLE TAB1 (EMPID NUMERIC(5) PRIMARY KEY NOT NULL,             
+   ENAME CHAR(12) NOT NULL,DEPT NUMERIC(2),SALARY NUMERIC(6)) IN        
+   WPR045DB.WPR045TS;                                                   
+CREATE UNIQUE INDEX IND2 ON TAB1(EMPID);                                
+INSERT INTO TAB1 VALUES (101,'RAVI',10,12000);                          
+INSERT INTO TAB1 VALUES (102,'RAJ',20,15000);                           
+INSERT INTO TAB1 VALUES (103,'RAJU',30,15000);                          
+INSERT INTO TAB1 VALUES (104,'RAJESH',30,15000);                        
+INSERT INTO TAB1 VALUES (105,'RAGHU',20,15000);                         
+INSERT INTO TAB1 VALUES (106,'RAMESH',30,15000);                        
+INSERT INTO TAB1 VALUES (107,'RAMA',10,15000);                          
+SELECT * FROM TAB1;                                                     
+SELECT DEPT,COUNT(*) NUMBS,SUM(SALARY) FROM TAB1 GROUP BY DEPT;         
+SELECT DEPT FROM TAB1 WHERE DEPT>10 GROUP BY DEPT                       
+    ORDER BY DEPT DESC;*/                                               
+DROP TABLE TAB1;                                                        

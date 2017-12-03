@@ -1,0 +1,15 @@
+/*CREATE TABLE TAB1(EMPID NUMERIC(3) PRIMARY KEY NOT NULL,              
+     ENAME VARCHAR(12) NOT NULL,SALARY NUMERIC(5) NOT NULL) IN          
+     WPR045DB.WPR045TS;                                                 
+CREATE UNIQUE INDEX IND2 ON TAB1(EMPID);                                
+INSERT INTO TAB1 VALUES (101,'RAJ',5000);                               
+INSERT INTO TAB1 VALUES (102,'RAJU',6500);                              
+INSERT INTO TAB1 VALUES (103,'RAJESH',4000);                            
+INSERT INTO TAB1 VALUES (104,'RAHMAN',6000);                            
+INSERT INTO TAB1 VALUES (105,'RASU',5500);                              
+SELECT ENAME FROM TAB1 WHERE SALARY IN                                  
+  (SELECT SALARY FROM TAB1 WHERE EMPID>102);                            
+SELECT * FROM TAB1 WHERE EMPID>102                                      
+UNION                                                                   
+SELECT * FROM TAB1 WHERE SALARY>6000;*/                                 
+SELECT * FROM TAB1;                                                     

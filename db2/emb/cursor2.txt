@@ -1,0 +1,50 @@
+       IDENTIFICATION DIVISION.                       
+       PROGRAM-ID. MEM4.                              
+       ENVIRONMENT DIVISION.                          
+       DATA DIVISION.                                 
+       WORKING-STORAGE SECTION.                       
+       01 SDET.                                       
+        02 SNU PIC 9(3).                              
+        02 SNAM PIC X(12).                            
+        02 TOTA PIC 9(3).                             
+           EXEC SQL                                   
+            INCLUDE TEST2                             
+           END-EXEC.                                  
+           EXEC SQL                                   
+            INCLUDE SQLCA                             
+           END-EXEC.                                  
+           EXEC SQL                                   
+            DECLARE CUR2 CURSOR FOR SELECT * FROM WPR045.TAB4           
+                  WHERE SNO=002                                         
+      *    FOR UPDATE OF SNAME                                          
+           END-EXEC.                                                    
+       PROCEDURE DIVISION.                                              
+           PERFORM OPENPARA.                                            
+           PERFORM CLOSEPARA.                                           
+           STOP RUN.                                                    
+       OPENPARA.                                                        
+           EXEC SQL                                                     
+            OPEN CUR2                                                   
+           END-EXEC.                                                    
+           IF SQLCODE = 0                                               
+            DISPLAY 'SUCCESS'                                           
+            PERFORM FETCHPARA UNTIL SQLCODE=100                         
+           ELSE                                                         
+            DISPLAY 'FAIL' SQLCODE                                      
+           END-IF.                                                    
+       FETCHPARA.                                                     
+           EXEC SQL                                                   
+            FETCH CUR2 INTO :DCLTAB4                                  
+           END-EXEC.                                                  
+           IF SQLCODE = 0                                             
+      *    EXEC SQL                                                   
+      *     UPDATE TAB4 SET SNAME='RAMESH' WHERE CURRENT OF CUR2      
+      *    END-EXEC                                                   
+           EXEC SQL                                                   
+            DELETE FROM TAB4 WHERE CURRENT OF CUR2                    
+           END-EXEC                                                   
+           END-IF.                                                    
+       CLOSEPARA.                                                     
+           EXEC SQL                                                   
+            CLOSE CUR2                                                
+           END-EXEC.                                                  

@@ -1,0 +1,19 @@
+/*create table table1 (sno numeric(3) primary key not null,             
+                sname char(12) not null,                                
+                clas numeric(2) not null) in wpr045db.wpr045ts;         
+create unique index ind1 on table1(sno);                                
+insert into table1 values (001,'ram',6);                                
+insert into table1 values (002,'raju',7);                               
+insert into table1 values (003,'ramesh',7);                             
+insert into table1 values (004,'raghu',8);                              
+select * from table1;                                                   
+delete from table1 where sno=002;                                       
+select sno from table1;                                                 
+select * from table1 where sno > 001 and clas >7;                       
+update table1 set sname='rajesh' where sno=003;                         
+select * from table1;                                                   
+alter table table1 add smark numeric(2) null;           
+insert into table1 smark values (95);                   
+update table1 set clas=clas+2 where sno > 001;*/        
+                                                        
+select * from table1;                                   

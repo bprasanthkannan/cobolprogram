@@ -1,0 +1,10 @@
+/*CREATE TABLE TAB1 (EMPID NUMERIC(3) PRIMARY KEY NOT NULL,             
+     ENAME CHAR(12) NOT NULL,SALARY NUMERIC(6) NOT NULL,ADDS NUMERIC(3))
+       IN WPR045DB.WPR045TS;                                            
+CREATE UNIQUE INDEX IND2 ON TAB1(EMPID);                                
+INSERT INTO TAB1 VALUES (101,'RAGHU',5000,250);                         
+INSERT INTO TAB1 VALUES (102,'SATHI',5050,260);                         
+INSERT INTO TAB1 VALUES (103,'BAGHU',5046,360);                         
+INSERT INTO TAB1 VALUES (104,'NAGHU',5000,350);*/                       
+SELECT EMPID,ENAME,SALARY+ADDS AS TOTAL FROM TAB1;                      
+DROP TABLE TAB1;                                                        

@@ -1,0 +1,10 @@
+//WPR045A JOB CLASS=A,NOTIFY=&SYSUID                         
+//LIB1   JCLLIB  ORDER=WPRADM.WIP.COMPILER                   
+//STEP1  EXEC  PROC=DB2JCL,                                  
+//       SRCLIB=WPR045.OCT23.EMBSQL,                         
+//       MEM=MEM9,                                           
+//       COPYLIB=WPR045.OCT23.EMBSQL,                        
+//       INCLIB=WPR045.OCT23.EMBSQL,                         
+//       DCLLIB=WPR045.OCT23.DCLGEN,                         
+//       DBRMLIB=WPR045.OCT23.DBRM,                          
+//       LOADLIB=WPR045.OCT23.LOADLIB                        

@@ -1,0 +1,105 @@
+       IDENTIFICATION DIVISION.                     
+       PROGRAM-ID. MEM8.                            
+       ENVIRONMENT DIVISION.                        
+       INPUT-OUTPUT SECTION.                        
+       FILE-CONTROL.                                
+           SELECT PS ASSIGN TO DD1                  
+           ORGANIZATION IS SEQUENTIAL               
+           ACCESS MODE IS SEQUENTIAL                
+           FILE STATUS IS FS.                       
+       DATA DIVISION.                               
+       FILE SECTION.                                
+       FD PS.                                       
+       01 PREC.                                     
+        02 ENO PIC 9(5).                            
+        02 ENAM PIC X(3).                               
+        02 DPT PIC X(5).                                
+        02 SLY PIC 9(5).                                
+        02 PHN PIC 9(5).                                
+        02 STS PIC A.                                   
+        02 RMK PIC X(56).                               
+       WORKING-STORAGE SECTION.                         
+       77 FS PIC 99.                                    
+       77 EOF PIC A VALUE 'S'.                          
+           EXEC SQL                                     
+            INCLUDE PRO1                                
+           END-EXEC.                                    
+           EXEC SQL                                     
+            INCLUDE SQLCA                               
+           END-EXEC.                                    
+       PROCEDURE DIVISION.                              
+           PERFORM OPENPARA.                            
+           PERFORM READPARA UNTIL EOF = 'E'.                   
+           PERFORM CLOSEPARA.                                  
+       OPENPARA.                                               
+           OPEN I-O PS.                                        
+           IF FS = 0                                           
+            DISPLAY 'SUCCESS'                                  
+           ELSE                                                
+            DISPLAY 'FAIL' FS                                  
+            STOP RUN                                           
+           END-IF.                                             
+       CLOSEPARA.                                              
+           CLOSE PS.                                           
+           STOP RUN.                                           
+       READPARA.                                               
+           READ PS                                             
+            AT END                                             
+            MOVE 'E' TO EOF                                    
+            NOT AT END                                             
+            DISPLAY PREC                                           
+            EVALUATE STS OF PREC                                   
+             WHEN 'I'                                              
+              PERFORM INSERTPARA                                   
+              REWRITE PREC                                         
+             WHEN 'U'                                              
+              PERFORM UPDATEPARA                                   
+              REWRITE PREC                                         
+             WHEN 'D'                                              
+              PERFORM DELETEPARA                                   
+            END-EVALUATE                                           
+           END-READ.                                               
+       INSERTPARA.                                                 
+           MOVE ENO TO EMPID.                                      
+           MOVE ENAM TO ENAME.                                     
+           MOVE DPT TO DEPT.                                       
+           MOVE SLY TO SALARY.                                          
+           MOVE PHN TO PHNO.                                            
+           EXEC SQL                                                     
+           INSERT INTO MASTER VALUES (:EMPID,:ENAME,:DEPT,:SALARY,:PHNO)
+           END-EXEC.                                                    
+           IF SQLCODE = 0                                               
+            DISPLAY 'SUCCESS'                                           
+            MOVE 'SUCCESS' TO RMK                                       
+           ELSE                                                         
+            DISPLAY 'FAIL' FS                                           
+            MOVE 'FAIL' TO RMK                                          
+           END-IF.                                                      
+       UPDATEPARA.                                                      
+           MOVE ENO TO EMPID.                                           
+           MOVE ENAM TO ENAME.                                          
+           MOVE DPT TO DEPT.                                            
+           MOVE SLY TO SALARY.                                     
+           MOVE PHN TO PHNO.                                       
+           EXEC SQL                                                
+           UPDATE MASTER SET ENAME=:ENAME,DEPT=:DEPT,              
+           SALARY=:SALARY,PHNO=:PHNO WHERE EMPID=:EMPID            
+           END-EXEC.                                               
+           IF SQLCODE = 0                                          
+            DISPLAY 'SUCCESS'                                      
+            MOVE 'SUCCESS' TO RMK                                  
+           ELSE                                                    
+            DISPLAY 'FAIL' FS                                      
+            MOVE 'FAIL' TO RMK                                     
+           END-IF.                                                 
+       DELETEPARA.                                                 
+           MOVE ENO TO EMPID.                                      
+           EXEC SQL                                                
+           DELETE FROM MASTER WHERE EMPID=:EMPID                   
+           END-EXEC.                                               
+
+
+
+
+      
+ 

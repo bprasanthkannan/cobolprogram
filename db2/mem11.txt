@@ -1,0 +1,11 @@
+/*CREATE TABLE PS1(EMPID NUMERIC(5) PRIMARY KEY NOT NULL,            
+     ENAME CHAR(3),DEPT CHAR(3),SALARY NUMERIC(5)) IN                
+     WPR045DB.WPR045TS;                                              
+CREATE UNIQUE INDEX P1 ON PS1(EMPID);                                
+INSERT INTO PS1 VALUES (10001,'RAJ','SAL',12000);                    
+INSERT INTO PS1 VALUES (10002,'RAC','SAL',12500);                    
+INSERT INTO PS1 VALUES (10003,'RAK','MAN',13000);                    
+INSERT INTO PS1 VALUES (10004,'JAJ','SAL',12500);                    
+INSERT INTO PS1 VALUES (10005,'LAJ','MAN',13050);                    
+INSERT INTO PS1 VALUES (10006,'SAJ','SAL',12600);*/                  
+SELECT * FROM PS1;                                                   

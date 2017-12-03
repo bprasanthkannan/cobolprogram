@@ -1,0 +1,5 @@
+/*CREATE TABLE TAB2 (EMPID NUMERIC(3) PRIMARY KEY NOT NULL,             
+             ENAME CHAR(12) NOT NULL) IN WPR045DB.WPR045TS;             
+CREATE UNIQUE INDEX IND3 ON TAB2(EMPID);*/                              
+INSERT INTO TAB2 VALUES (102,'KANNAN');                                 
+SELECT * FROM TAB2;                                                     

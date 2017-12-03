@@ -1,0 +1,22 @@
+//WPR045A JOB ,,NOTIFY=&SYSUID,CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,  
+//         LINES=(1,CANCEL)                                        
+//JOBLIB   DD  DISP=SHR,                                           
+//            DSN=IGY.SIGYCOMP                                     
+//         DD DISP=SHR,                                            
+//            DSN=DSNA10.SDSNLOAD                                  
+//         DD DISP=SHR,                                            
+//            DSN=CEE.SCEERUN                                      
+//*        4: RUN PROGRAMS                                         
+//PH027S04 EXEC PGM=IKJEFT01,DYNAMNBR=20,COND=(4,LT)               
+//DD1 DD DSN=WPR045.OCT23.TEST,DISP=SHR                            
+//SYSTSPRT DD SYSOUT=*                                             
+//SYSPRINT DD SYSOUT=*                                             
+//SYSIN    DD *                                                    
+501                                                               
+RAVI                                                              
+6000                                                              
+/*                                                                
+//SYSTSIN  DD *                                                   
+  DSN SYSTEM(DSN)                                                 
+  RUN PROGRAM(MEM9) PLAN(WPR045A) LIB('WPR045.OCT23.LOADLIB')     
+  END                                                             

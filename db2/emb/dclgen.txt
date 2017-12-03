@@ -1,0 +1,37 @@
+       IDENTIFICATION DIVISION.                              
+       PROGRAM-ID. MEM2.                                     
+       ENVIRONMENT DIVISION.                                 
+       DATA DIVISION.                                        
+       WORKING-STORAGE SECTION.                              
+       01 TAB.                                               
+        02 EMPNO PIC 9(3).                                   
+        02 ENAM PIC A(12).                                   
+           EXEC SQL                                          
+            INCLUDE TEST1                                    
+           END-EXEC.                                         
+           EXEC SQL                                          
+            INCLUDE SQLCA                                    
+           END-EXEC.                                         
+       PROCEDURE DIVISION.                                            
+           PERFORM ACCEPTPARA.                                        
+           PERFORM INSERTPARA.                                        
+           STOP RUN.                                                  
+      *ACCEPTPARA.                                                    
+      *    ACCEPT EMPNO.                                              
+      *    ACCEPT ENAM.                                               
+       INSERTPARA.                                                    
+      *    MOVE EMPNO TO EMPID.                                       
+      *    MOVE ENAM TO ENAME.                                        
+      *    EXEC SQL                                                   
+      *     INSERT INTO TAB2 VALUES( :EMPID, :ENAME)                  
+      *    END-EXEC.                                                  
+           EXEC SQL                                                   
+            UPDATE TAB2 SET ENAME='RAJ' WHERE EMPID=501               
+           END-EXEC.                                                  
+           DISPLAY EMPID.                                              	
+           DISPLAY ENAME.                                        
+           IF SQLCODE = 0                                        
+            DISPLAY 'SUCCESS'                                    
+           ELSE                                                  
+            DISPLAY 'FAIL' SQLCODE                               
+           END-IF.                                               

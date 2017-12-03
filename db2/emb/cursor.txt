@@ -1,0 +1,46 @@
+       IDENTIFICATION DIVISION.                         
+       PROGRAM-ID. MEM3.                                
+       ENVIRONMENT DIVISION.                            
+       DATA DIVISION.                                   
+       WORKING-STORAGE SECTION.                         
+       01 SDET.                                         
+        02 SNU PIC 9(3).                                
+        02 SNAM PIC X(12).                              
+        02 TOTA PIC 9(3).                               
+           EXEC SQL                                     
+            INCLUDE TEST2                               
+           END-EXEC.                                    
+           EXEC SQL                                     
+            INCLUDE SQLCA                               
+           END-EXEC.                                    
+           EXEC SQL                                     
+            DECLARE CUR1 CURSOR FOR SELECT * FROM WPR045.TAB4           
+           END-EXEC.                                                    
+       PROCEDURE DIVISION.                                              
+           PERFORM OPENPARA.                                            
+           PERFORM CLOSEPARA.                                           
+           STOP RUN.                                                    
+       OPENPARA.                                                        
+           EXEC SQL                                                     
+            OPEN CUR1                                                   
+           END-EXEC.                                                    
+           IF SQLCODE = 0                                               
+            DISPLAY 'SUCCESS'                                           
+            PERFORM FETCHPARA UNTIL SQLCODE = 100                       
+           ELSE                                                         
+            DISPLAY 'FAIL' SQLCODE                                      
+           END-IF.                                                      
+       FETCHPARA.                                                       
+           EXEC SQL                                                  
+            FETCH CUR1 INTO :DCLTAB4                                 
+           END-EXEC.                                                 
+           IF SQLCODE = 0                                            
+            DISPLAY 'SUCCESS'                                        
+            DISPLAY DCLTAB4                                          
+           ELSE                                                      
+            DISPLAY 'FAIL' SQLCODE                                   
+           END-IF.                                                   
+       CLOSEPARA.                                                    
+           EXEC SQL                                                  
+            CLOSE CUR1                                               
+           END-EXEC.                                                 

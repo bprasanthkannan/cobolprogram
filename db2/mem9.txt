@@ -1,0 +1,9 @@
+/*create table tab4(sno numeric(3) primary key not null,           
+   sname varchar(12),tot numeric(3)) in wpr045db.wpr045ts;         
+create unique index ind5 on tab4(sno);                             
+insert into tab4 values (001,'akash',482);                         
+insert into tab4 values (002,'rakash',450);                        
+insert into tab4 values (003,'sakash',464);                        
+insert into tab4 values (004,'jakash',434);*/                      
+insert into tab4 values (005,null,456);                            
+select * from tab4                                                 

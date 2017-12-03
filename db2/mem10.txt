@@ -1,0 +1,5 @@
+/*CREATE TABLE MASTER(EMPID NUMERIC(5) PRIMARY KEY NOT NULL,            
+   ENAME CHAR(3) NOT NULL,DEPT CHAR(5),SALARY NUMERIC(5),               
+   PHNO NUMERIC(5)) IN WPR045DB.WPR045TS;                               
+CREATE UNIQUE INDEX M1 ON MASTER(EMPID);*/                              
+SELECT * FROM MASTER;                                                   
